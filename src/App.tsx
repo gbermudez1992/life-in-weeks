@@ -64,9 +64,13 @@ function App() {
             />
 
             <footer className="app-footer">
-              <p>
+              <p className="mb-4">
                 "You act like mortals in all that you fear, and like immortals
                 in all that you desire." — Seneca
+              </p>
+              <p className="text-xs opacity-75">
+                Based on a global average life expectancy of 73 years (Source:
+                United Nations / WHO).
               </p>
             </footer>
           </motion.div>

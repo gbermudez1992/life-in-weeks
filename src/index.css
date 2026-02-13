@@ -344,3 +344,16 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* Utilities */
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
