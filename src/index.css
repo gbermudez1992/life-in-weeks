@@ -284,6 +284,12 @@ body {
   transition: all 0.2s;
   width: 100%;
   box-sizing: border-box;
+  /* iOS Fixes */
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  color: var(--ink-black);
+  min-height: 3.5rem; /* Ensure tap target size */
 }
 
 .date-input:focus {
