@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# Life in Weeks - Memento Mori
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalist, high-contrast visualization of your life in weeks. This application assumes a global average life expectancy of 73 years and maps it onto a 52-column grid, offering a stark perspective on time lived versus time remaining.
 
-Currently, two official plugins are available:
+> "You act like mortals in all that you fear, and like immortals in all that you desire." — Seneca
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Visualizing Time:** A responsive grid representing ~3,800 weeks of life.
+- **Paper & Ink Aesthetic:** A clean, high-contrast theme designed to focus the mind.
+- **Life Stats:** Instant calculation of weeks lived and weeks remaining based on your birth date.
+- **Interactive Tooltips:** Hover over any week to see the date range and your age at that specific time.
+- **Data Persistence:** Your birth date is saved locally, so you don't have to re-enter it every time.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+This project is built with a focus on simplicity, performance, and modern web standards.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Framework:** React 18
+- **Build Tool:** Vite
+- **Language:** TypeScript
+- **Styling:** Vanilla CSS (CSS Variables for theming)
+- **Deployment:** Netlify (or ready for any static host)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1.  **Clone the repository:**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+    ```bash
+    git clone https://github.com/your-username/life-in-boxes.git
+    cd life-in-boxes
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.  **Install dependencies:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    ```bash
+    pnpm install
+    # or
+    npm install
+    ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3.  **Run the development server:**
+
+    ```bash
+    pnpm run dev
+    # or
+    npm run dev
+    ```
+
+4.  **Build for production:**
+    ```bash
+    pnpm run build
+    ```
+
+## Philosophy
+
+The design is intentionally stark. The "passed" weeks are filled with heavy, permanent ink `(#1A1A1A)`, while the "current" week pulses with urgency `(#D32F2F)`. The future remains an unwritten, faint outline. This visualization serves as a digital _Memento Mori_—a reminder of the finite nature of our time.
