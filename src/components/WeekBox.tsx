@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 interface WeekBoxProps {
   status: "past" | "current" | "future";
@@ -17,15 +16,9 @@ export const WeekBox: React.FC<WeekBoxProps> = ({
   delay = 0,
 }) => {
   return (
-    <motion.div
-      initial={
-        status === "past"
-          ? { opacity: 0, scale: 0.8 }
-          : { opacity: 1, scale: 1 }
-      }
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.1, delay }}
-      className={`week-box ${status}`}
+    <div
+      className={`week-box ${status} ${status === "past" ? "animate-in" : ""}`}
+      style={status === "past" ? { animationDelay: `${delay}s` } : undefined}
       title={dateRange ? `Week ${weekIndex + 1} - Age ${age}` : undefined}
     >
       {/* Tooltip on hover */}
@@ -36,6 +29,6 @@ export const WeekBox: React.FC<WeekBoxProps> = ({
           <div>Age {age}</div>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
