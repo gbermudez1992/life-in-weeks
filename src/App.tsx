@@ -2,7 +2,10 @@ import { useState } from "react";
 import { Onboarding } from "./components/Onboarding";
 import { LifeGrid } from "./components/LifeGrid";
 import { useLifeCalc } from "./hooks/useLifeCalc";
-import { motion, AnimatePresence } from "framer-motion";
+import { SenecaProtocol } from "./components/SenecaProtocol";
+import { AntiBucketList } from "./components/AntiBucketList";
+import { DeathClock } from "./components/DeathClock";
+import { motion } from "framer-motion";
 
 function App() {
   const [birthDate, setBirthDate] = useState<string | null>(() => {
@@ -10,51 +13,45 @@ function App() {
   });
 
   const { weeksLived, weeksLeft } = useLifeCalc(birthDate);
+  // Seneca Protocol active by default if user has onboarded (has birthDate)
+  const [isSenecaActive, setIsSenecaActive] = useState(!!birthDate);
 
   const handleDateSubmit = (date: string) => {
     localStorage.setItem("life_weeks_birthdate", date);
     setBirthDate(date);
+    // Show Seneca to set the tone
+    setIsSenecaActive(true);
   };
 
   const handleReset = () => {
-    if (confirm("Are you sure you want to reset your birthdate?")) {
+    if (confirm("Are you sure you want to reset your life?")) {
       localStorage.removeItem("life_weeks_birthdate");
       setBirthDate(null);
+      setIsSenecaActive(false);
     }
   };
 
   return (
     <div className="app-container">
-      <AnimatePresence mode="wait">
+      <div className="main-content">
         {!birthDate ? (
-          <motion.div
-            key="onboarding"
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.5 }}
-            className="w-full flex-grow flex flex-col justify-center"
-            style={{
-              width: "100%",
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <Onboarding onComplete={handleDateSubmit} />
-          </motion.div>
+          <Onboarding onComplete={handleDateSubmit} />
         ) : (
           <motion.div
-            key="grid"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="main-content"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="w-full flex flex-col items-center"
           >
+            {isSenecaActive && (
+              <SenecaProtocol onDismiss={() => setIsSenecaActive(false)} />
+            )}
+
             <header className="app-header">
               <h1 className="app-title">Life in Weeks</h1>
-              <div className="reset-btn" onClick={handleReset}>
+              <button onClick={handleReset} className="reset-btn">
                 Reset
-              </div>
+              </button>
             </header>
 
             <LifeGrid
@@ -62,6 +59,10 @@ function App() {
               weeksLeft={weeksLeft}
               birthDate={birthDate}
             />
+
+            <DeathClock birthDate={birthDate} />
+
+            <AntiBucketList weeksLeft={weeksLeft} />
 
             <footer className="app-footer">
               <p className="mb-4">
@@ -75,7 +76,7 @@ function App() {
             </footer>
           </motion.div>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   );
 }
